@@ -17,6 +17,9 @@ public class Data {
 	
 	public static int yinchangline=0;	//隐藏字段数值
 	
+	static long score_chuangguan=0;//闯关模式分数
+	static int level_chuangguan=1;
+	
 	public static int getYinchangline() {
 		return yinchangline;
 	}
@@ -175,7 +178,11 @@ public class Data {
 				}
 				line++;
 				
-				switch(GameActivity.level){//根据等级计算分数
+				switch (GameModel.MODEL) {
+				case 0://经典模式				
+					
+				case 1://隐藏模式
+					switch(GameActivity.level){//根据等级计算分数
 					case 0:
 						score=line*10;
 						break;
@@ -188,6 +195,14 @@ public class Data {
 					default:
 						score=line*10000;
 				}
+					break;
+				default://闯关模式
+					score_chuangguan=line*10+(level_chuangguan-1)*20;
+					break;
+				}
+				
+				
+				
 			}
 		}
 	}
@@ -199,11 +214,31 @@ public class Data {
 		return true;
 	}
 	public boolean isGameOver(){//判断游戏是否结束
-		for(int i=0;i<of_Height;i++){
-			if(m_screen[3][i]!=0){
+		switch (GameModel.MODEL) {
+		case 0://经典模式				
+			
+		case 1://隐藏模式
+			for(int i=0;i<of_Height;i++){
+				if(m_screen[3][i]!=0){
+					return true;
+				}
+			}
+			break;
+		default://闯关模式
+			if(score_chuangguan>=level_chuangguan*100){
 				return true;
 			}
+			else
+			{
+				for(int i=0;i<of_Height;i++){
+					if(m_screen[3][i]!=0){
+						return true;
+					}
+				}
+			}
+			break;
 		}
+		
 		return false;
 	}
 }

@@ -61,14 +61,16 @@
                 android:layout_margin="5dp"
                 android:background="@android:color/white"
                 android:gravity="center_horizontal"
-                android:text="\n消除行数\n\n0" />
-            <Button
+                android:text="\n消除行数\n0" />
+            <Button 
+            	
                 android:id="@+id/fastdown"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_below="@id/done"
-                android:text="速降" />
+                android:background="@drawable/control_drop1"
+                />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -91,7 +93,9 @@
             android:layout_margin="3dp"
             android:layout_toRightOf="@id/left"
             android:text="向右" />
-
+		
+        
+        
         <Button
             android:id="@+id/down"
             android:layout_width="78dp"

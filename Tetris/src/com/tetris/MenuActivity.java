@@ -18,6 +18,8 @@ public class MenuActivity extends Activity{//开始菜单类
 	
 	
 	Button startClasscialBtn = null;
+	Button startChuangGuanBtn = null;
+	
 	
 	Button startYincangBtn = null;//开始游戏按钮
 	
@@ -46,6 +48,7 @@ public class MenuActivity extends Activity{//开始菜单类
 		setContentView(R.layout.menu);
 		
 		startClasscialBtn=(Button) findViewById(R.id.startClassical);
+		startChuangGuanBtn=(Button) findViewById(R.id.startCuangGuan);
 		
 		startYincangBtn = (Button)findViewById(R.id.start);//开始游戏
 		hscoreB = (Button)findViewById(R.id.high_score);//最高分
@@ -132,6 +135,19 @@ public class MenuActivity extends Activity{//开始菜单类
 				intent.setClass(MenuActivity.this, GameActivity.class);
 				startActivity(intent);
 				
+			}
+		});
+		
+		startChuangGuanBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 自动生成的方法存根
+				GameModel.MODEL=GameModel.MODEL_CHUANGGUAN;//闯关模式
+				
+				Intent intent = new Intent();
+				intent.setClass(MenuActivity.this, GameActivity.class);
+				startActivity(intent);
 			}
 		});
 		

@@ -32,7 +32,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_below="@id/stopclassical"
-                android:layout_margin="10dp"/>
+                android:layout_margin="5dp"/>
 
             <TextView
                 android:id="@+id/scoreclassical"
@@ -53,13 +53,13 @@
                 android:layout_margin="5dp"
                 android:background="@android:color/white"
                 android:gravity="center_horizontal"
-                android:text="\n消除行数\n\n0" />
+                android:text="\n消除行数\n0" />
             
             <Button
                 android:id="@+id/fastdownclassical"
                 android:layout_width="100dp"
                 android:layout_height="60dp"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:layout_below="@id/doneclassical"
                 android:text="速降" />
         </RelativeLayout>

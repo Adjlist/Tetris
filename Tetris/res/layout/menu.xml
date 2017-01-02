@@ -10,7 +10,7 @@
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
-		android:layout_marginTop="65dp"
+		android:layout_marginTop="35dp"
         android:text="经典模式" />
     
     <Button
@@ -18,15 +18,23 @@
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
-		android:layout_marginTop="65dp"
+		android:layout_marginTop="25dp"
         android:text="隐藏模式" />
+    
+    <Button
+        android:id="@+id/startCuangGuan"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+		android:layout_marginLeft="80dp"
+		android:layout_marginTop="25dp"
+        android:text="闯关模式" />
 
     <Button
         android:id="@+id/high_score"
         android:layout_width="200dp"
         android:layout_height="60dp"
      	android:layout_marginLeft="80dp"
-		android:layout_marginTop="65dp"
+		android:layout_marginTop="25dp"
         android:text="最高分"
     ></Button>
     <Button
@@ -34,7 +42,7 @@
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
-		android:layout_marginTop="65dp"
+		android:layout_marginTop="25dp"
         android:text="设   置"
     ></Button>
     <Button
@@ -42,7 +50,7 @@
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
-		android:layout_marginTop="65dp"
+		android:layout_marginTop="25dp"
         android:text="退出"
     ></Button>
 

@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:layout_margin="10dp" >
+
+        <com.tetris.GameChuangGuanView
+            android:id="@+id/tetv_chuangguan"
+            android:layout_width="230dp"
+            android:layout_height="460dp" />
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="450dp"
+            android:layout_toRightOf="@id/tetv_chuangguan" >
+
+            <Button
+                android:id="@+id/stop_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:text="暂停" />
+            
+            
+
+            <com.tetris.ShapView
+                android:id="@+id/sv_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/stop_chuangguan"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/score_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/sv_chuangguan"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal"
+                android:text="\n得分\n\n0"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/done_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/score_chuangguan"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal"
+                android:text="\n消除行数\n0" />
+            
+            
+            <TextView
+                android:id="@+id/level_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/done_chuangguan"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal"
+                android:text="\n关卡\n" />
+            
+            <Button 
+            	
+                android:id="@+id/fastdown_chuangguan"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:layout_below="@id/level_chuangguan"
+                android:background="@drawable/control_drop1"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_margin="1dp" >
+
+        <Button
+            android:id="@+id/left_chuangguan"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:text="向左" />
+
+        <Button
+            android:id="@+id/right_chuangguan"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/left_chuangguan"
+            android:text="向右" />
+		
+        
+        
+        <Button
+            android:id="@+id/down_chuangguan"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/right_chuangguan"
+            android:text="下降" />
+        <Button
+            android:id="@+id/rotate_chuangguan"
+            android:layout_width="92dp"
+            android:layout_height="60dp"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@id/down_chuangguan"
+            android:text="旋转" />
+    </RelativeLayout>
+
+</LinearLayout>

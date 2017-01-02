@@ -17,6 +17,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -45,6 +46,7 @@ public class GameActivity extends Activity {//游戏运行类
 	TextView m_TextDone = null;
 	TextView m_TextScore = null;
 	
+	TextView m_TextLevel=null;
 	
 	Handler m_handler = null;//负责接收消息
 	Timer timer = null;//负责发送消息
@@ -56,12 +58,17 @@ public class GameActivity extends Activity {//游戏运行类
 	GestureDetector m_detector = null;//手势
 	SharedPreferences m_sp = null;//用于存储最高分等
 	String fileName = "Data";//存放游戏一些数据，最高分、难度、音乐、触摸屏
+	
+	
 	final String HIGH_SCORE = "highscore";
 	final String GAME_HARD = "gamehard";//存放游戏难度
 	final String GAME_MUSIC = "gamemusic";//游戏音乐
 	final String TOUCH_SCREEM = "touchscreem";//触屏开关
 	
+	final String HIGH_SCORE_CG="high_score_cg";//闯关模式的分数
+	final String LEVEL_CG="level";//闯关模式的等级
 	final String GAME_YINCANG = "yincang"; 	//存储隐藏行数
+	
 	
 	private class MyGestureDetector extends GestureDetector.SimpleOnGestureListener{//设置手势响应
 		@Override
@@ -108,7 +115,7 @@ public class GameActivity extends Activity {//游戏运行类
 			setContentView(R.layout.gamerun_yincang);
 			break;
 		default://闯关模式
-			
+			setContentView(R.layout.gamerun_chuangguan);
 			break;
 		}
 		
@@ -118,7 +125,114 @@ public class GameActivity extends Activity {//游戏运行类
 		
 	}
 	protected void onGameOver() {//处理游戏结束事件,弹出对话框提示
+		
 		timer.cancel();
+		SharedPreferences.Editor editor = m_sp.edit();
+		
+		switch (GameModel.MODEL) {
+		case 0://经典模式				
+		case 1://隐藏模式
+			if(m_sp.getLong(HIGH_SCORE, 0)<Data.score)
+			{//存储最高分				
+				editor.putLong(HIGH_SCORE, Data.score);
+				editor.commit();
+			}
+			AlertDialog.Builder bulider = new AlertDialog.Builder(this);//设置游戏结束对话框
+			bulider.setMessage("游戏结束，是否重新开始？");
+			bulider.setTitle("游戏结束！");
+			bulider.setPositiveButton("重新开始", new DialogInterface.OnClickListener()
+			{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					m_MediaPlayer.release();
+					inItTools();
+				}
+				
+			});
+			bulider.setNegativeButton("退出游戏", new DialogInterface.OnClickListener() 
+			{
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					
+					finish();
+				}
+			});
+			bulider.create();
+			bulider.show();
+			
+			break;
+		default://闯关模式
+			if(m_sp.getLong(HIGH_SCORE_CG, 0)<=Data.score_chuangguan)
+			{//存储最高分
+				editor.putLong(HIGH_SCORE_CG, Data.score_chuangguan);
+				editor.commit();
+			}
+			if(Data.level_chuangguan*100<=Data.score_chuangguan){
+				int a=(int)(Data.score_chuangguan/100)+1;
+				editor.putInt(LEVEL_CG,a);
+				Data.level_chuangguan=a;
+				editor.commit();
+				
+				AlertDialog.Builder bulider1 = new AlertDialog.Builder(this);//设置游戏结束对话框
+				bulider1.setMessage("是否进行下一关？");
+				bulider1.setTitle("恭喜您，过关了！");
+				bulider1.setPositiveButton("下一关", new DialogInterface.OnClickListener() 
+				{
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						m_MediaPlayer.release();
+						inItTools();
+					}
+				});
+				bulider1.setNegativeButton("退出游戏", new DialogInterface.OnClickListener() 
+				{
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) 
+					{
+						
+						finish();
+					}
+				});
+				bulider1.create();
+				bulider1.show();				
+				
+			}
+			else {
+				AlertDialog.Builder bulider1 = new AlertDialog.Builder(this);//设置游戏结束对话框
+				bulider1.setMessage("是否重新开始？");
+				bulider1.setTitle("您输了...");
+				bulider1.setPositiveButton("重新开始", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						m_MediaPlayer.release();
+						inItTools();
+					}
+				});
+				bulider1.setNegativeButton("退出游戏", new DialogInterface.OnClickListener() 
+				{
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) 
+					{
+						
+						finish();
+					}
+				});
+				bulider1.create();
+				bulider1.show();
+				
+			}
+			
+			break;
+		}
+		
+		/*timer.cancel();
 		if(m_sp.getLong(HIGH_SCORE, 0)<Data.score){//存储最高分
 			SharedPreferences.Editor editor = m_sp.edit();
 			editor.putLong(HIGH_SCORE, Data.score);
@@ -148,6 +262,7 @@ public class GameActivity extends Activity {//游戏运行类
 		});
 		bulider.create();
 		bulider.show();
+		*/
 	}
 	
 	public void inItTools() {// 初始化
@@ -158,23 +273,32 @@ public class GameActivity extends Activity {//游戏运行类
 		longRight = false;
 		longDown = false;
 		data = new Data();//创建一个新的Data对象
-		level = m_sp.getInt(GAME_HARD, 0);
 		
+		
+		//level = m_sp.getInt(GAME_HARD, 0);		
 		Data.setYinchangline(m_sp.getInt(GAME_YINCANG, 0));//设置隐藏
+		//speed = Math.abs(20-level*7);//游戏速度
 		
-		speed = Math.abs(20-level*7);//游戏速度
 		
 		switch (GameModel.MODEL) {
 		case 0://经典模式
+			level = m_sp.getInt(GAME_HARD, 0);
+			speed=Math.abs(20-level*7);//游戏速度
 			m_TextDone = (TextView) findViewById(R.id.doneclassical);
 			m_TextScore = (TextView) findViewById(R.id.scoreclassical);
 			break;
 		case 1://隐藏模式
+			level = m_sp.getInt(GAME_HARD, 0);
+			speed=Math.abs(20-level*7);//游戏速度
 			m_TextDone = (TextView) findViewById(R.id.done);
 			m_TextScore = (TextView) findViewById(R.id.score);
 			break;
 		default://闯关模式
-			
+			level=m_sp.getInt(LEVEL_CG, 1);			
+			speed=Math.abs(40-level*4);
+			m_TextDone = (TextView) findViewById(R.id.done_chuangguan);
+			m_TextScore = (TextView) findViewById(R.id.score_chuangguan);
+			m_TextLevel=(TextView) findViewById(R.id.level_chuangguan);
 			break;
 		}
 		
@@ -241,7 +365,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonLeft = (Button) findViewById(R.id.left);//设置左移按钮
 			break;
 		default://闯关模式
-			
+			m_ButtonLeft=(Button) findViewById(R.id.left_chuangguan);
 			break;
 		}
 		
@@ -279,7 +403,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonRight = (Button) findViewById(R.id.right);//设置右移按钮
 			break;
 		default://闯关模式
-			
+			m_ButtonRight = (Button) findViewById(R.id.right_chuangguan);//设置右移按钮
 			break;
 		}
 		
@@ -317,7 +441,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonDown = (Button) findViewById(R.id.down);//设置下降按钮
 			break;
 		default://闯关模式
-			
+			m_ButtonDown = (Button) findViewById(R.id.down_chuangguan);//设置下降按钮
 			break;
 		}
 		
@@ -356,7 +480,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonFastDown = (Button) findViewById(R.id.fastdown);//设置下降按钮
 			break;
 		default://闯关模式
-			
+			m_ButtonFastDown = (Button) findViewById(R.id.fastdown_chuangguan);//设置下降按钮
 			break;
 		}
 		
@@ -396,7 +520,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonRotatae =(Button) findViewById(R.id.rotate);
 			break;
 		default://闯关模式
-			
+			m_ButtonRotatae =(Button) findViewById(R.id.rotate_chuangguan);
 			break;
 		}
 		
@@ -427,7 +551,7 @@ public class GameActivity extends Activity {//游戏运行类
 			m_ButtonPause = (Button) findViewById(R.id.stop);//设置暂停按钮
 			break;
 		default://闯关模式
-			
+			m_ButtonPause = (Button) findViewById(R.id.stop_chuangguan);//设置暂停按钮
 			break;
 		}
 		
@@ -498,7 +622,8 @@ public class GameActivity extends Activity {//游戏运行类
 			m_GameView = (GameYincangView) findViewById(R.id.tetv);
 			break;
 		default://闯关模式
-			
+			m_ShapView = (ShapView) findViewById(R.id.sv_chuangguan);
+			m_GameView = (GameChuangGuanView)findViewById(R.id.tetv_chuangguan);
 			break;
 		}
 		
@@ -558,22 +683,60 @@ public class GameActivity extends Activity {//游戏运行类
 		
 	}
 	public void setText(){//更新分数
-		m_TextDone.setText("\n消除行数\n\n"+Data.line);
-		m_TextScore.setText("\n得分\n\n"+Data.score);
+		
+		switch (GameModel.MODEL) {
+		case 0://经典模式			
+		case 1://隐藏模式
+			m_TextScore.setText("\n得分\n\n"+Data.score);
+			break;
+		default://闯关模式
+			m_TextLevel.setText("\n关卡\n"+Data.level_chuangguan);
+			m_TextScore.setText("\n得分\n"+Data.score_chuangguan);
+			break;
+		}
+		
+		m_TextDone.setText("\n消除行数\n"+Data.line);
+		
 	}
 
 	@Override
 	protected void onDestroy() {//释放资源
 		super.onDestroy();
+		SharedPreferences.Editor editor = m_sp.edit();
+		switch (GameModel.MODEL) {
+		case 0://经典模式			
+		case 1://隐藏模式
+			if(m_sp.getLong(HIGH_SCORE, 0)<Data.score){//存储最高分				
+				editor.putLong(HIGH_SCORE, Data.score);
+				editor.commit();
+			}
+			break;
+		default://闯关模式
+			if(m_sp.getLong(HIGH_SCORE_CG, 0)<Data.score_chuangguan)
+			{
+				
+				editor.putLong(HIGH_SCORE_CG, Data.score_chuangguan);
+				if(Data.level_chuangguan*100<=Data.score_chuangguan)
+				{
+						int a=(int)(Data.score_chuangguan/100);
+						editor.putInt(LEVEL_CG,++a);
+						Data.level_chuangguan=m_sp.getInt(LEVEL_CG, 1);
+						editor.commit();	
+				}
+				editor.commit();
+			}
+			break;
+		}
+		
+		
+		/*
 		if(m_sp.getLong(HIGH_SCORE, 0)<Data.score){//存储最高分
 			SharedPreferences.Editor editor = m_sp.edit();
 			editor.putLong(HIGH_SCORE, Data.score);
 			editor.commit();
 		}
+		*/
 		m_MediaPlayer.release();
-		
-		
-		
 		timer.cancel();
 	}
 }
