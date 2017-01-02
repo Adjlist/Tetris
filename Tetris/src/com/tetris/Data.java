@@ -16,6 +16,7 @@ public class Data {
 	static long line = 0;
 	
 	public static int yinchangline=0;	//隐藏字段数值
+	public static int CHUANGGUAN_TOP_SCORE=100;
 	
 	static long score_chuangguan=0;//闯关模式分数
 	static int level_chuangguan=1;
@@ -197,10 +198,9 @@ public class Data {
 				}
 					break;
 				default://闯关模式
-					score_chuangguan=line*10+(level_chuangguan-1)*20;
+					score_chuangguan=line*10+(level_chuangguan-1)*Data.CHUANGGUAN_TOP_SCORE;
 					break;
-				}
-				
+				}			
 				
 				
 			}
@@ -225,7 +225,7 @@ public class Data {
 			}
 			break;
 		default://闯关模式
-			if(score_chuangguan>=level_chuangguan*100){
+			if(score_chuangguan>=level_chuangguan*CHUANGGUAN_TOP_SCORE){
 				return true;
 			}
 			else

@@ -116,6 +116,7 @@ public class GameActivity extends Activity {//游戏运行类
 			break;
 		default://闯关模式
 			setContentView(R.layout.gamerun_chuangguan);
+			
 			break;
 		}
 		
@@ -170,8 +171,8 @@ public class GameActivity extends Activity {//游戏运行类
 				editor.putLong(HIGH_SCORE_CG, Data.score_chuangguan);
 				editor.commit();
 			}
-			if(Data.level_chuangguan*100<=Data.score_chuangguan){
-				int a=(int)(Data.score_chuangguan/100)+1;
+			if(Data.level_chuangguan*Data.CHUANGGUAN_TOP_SCORE<=Data.score_chuangguan){
+				int a=(int)(Data.score_chuangguan/Data.CHUANGGUAN_TOP_SCORE)+1;
 				editor.putInt(LEVEL_CG,a);
 				Data.level_chuangguan=a;
 				editor.commit();
@@ -203,6 +204,9 @@ public class GameActivity extends Activity {//游戏运行类
 				
 			}
 			else {
+				
+				Data.score_chuangguan=(Data.level_chuangguan-1)*Data.CHUANGGUAN_TOP_SCORE;
+				
 				AlertDialog.Builder bulider1 = new AlertDialog.Builder(this);//设置游戏结束对话框
 				bulider1.setMessage("是否重新开始？");
 				bulider1.setTitle("您输了...");
@@ -687,7 +691,7 @@ public class GameActivity extends Activity {//游戏运行类
 		switch (GameModel.MODEL) {
 		case 0://经典模式			
 		case 1://隐藏模式
-			m_TextScore.setText("\n得分\n\n"+Data.score);
+			m_TextScore.setText("\n得分\n"+Data.score);
 			break;
 		default://闯关模式
 			m_TextLevel.setText("\n关卡\n"+Data.level_chuangguan);
@@ -716,12 +720,12 @@ public class GameActivity extends Activity {//游戏运行类
 			{
 				
 				editor.putLong(HIGH_SCORE_CG, Data.score_chuangguan);
-				if(Data.level_chuangguan*100<=Data.score_chuangguan)
-				{
-						int a=(int)(Data.score_chuangguan/100);
+				if(Data.level_chuangguan*Data.CHUANGGUAN_TOP_SCORE<=Data.score_chuangguan)
+				{					
+						int a=(int)(Data.score_chuangguan/Data.CHUANGGUAN_TOP_SCORE);
 						editor.putInt(LEVEL_CG,++a);
 						Data.level_chuangguan=m_sp.getInt(LEVEL_CG, 1);
-						editor.commit();	
+						editor.commit();
 				}
 				editor.commit();
 			}
@@ -739,4 +743,11 @@ public class GameActivity extends Activity {//游戏运行类
 		m_MediaPlayer.release();
 		timer.cancel();
 	}
+	
+	
+	@Override
+		public void onBackPressed() {
+			// TODO 自动生成的方法存根
+			
+		}
 }

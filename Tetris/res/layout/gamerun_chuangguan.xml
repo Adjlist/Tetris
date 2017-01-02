@@ -44,7 +44,7 @@
                 android:layout_margin="5dp"
                 android:background="@android:color/white"
                 android:gravity="center_horizontal"
-                android:text="\n得分\n\n0"
+                android:text="\n得分\n0"
                 android:textSize="15sp" />
 
             <TextView
