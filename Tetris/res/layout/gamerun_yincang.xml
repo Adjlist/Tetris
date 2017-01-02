@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:layout_margin="10dp" >
+
+        <com.tetris.GameYincangView
+            android:id="@+id/tetv"
+            android:layout_width="230dp"
+            android:layout_height="460dp" />
+
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="450dp"
+            android:layout_toRightOf="@id/tetv" >
+
+            <Button
+                android:id="@+id/stop"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:text="暂停" />
+            
+            <Button
+                android:id="@+id/hint"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"                
+                android:layout_below="@id/stop"
+                android:text="Hint" />
+
+            <com.tetris.ShapView
+                android:id="@+id/sv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/hint"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/sv"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal"
+                android:text="\n得分\n\n0"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/done"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/score"
+                android:layout_margin="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_horizontal"
+                android:text="\n消除行数\n\n0" />
+            <Button
+                android:id="@+id/fastdown"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/done"
+                android:text="速降" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_margin="1dp" >
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:text="向左" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/left"
+            android:text="向右" />
+
+        <Button
+            android:id="@+id/down"
+            android:layout_width="78dp"
+            android:layout_height="60dp"
+            android:layout_margin="3dp"
+            android:layout_toRightOf="@id/right"
+            android:text="下降" />
+        <Button
+            android:id="@+id/rotate"
+            android:layout_width="92dp"
+            android:layout_height="60dp"
+            android:layout_margin="1dp"
+            android:layout_toRightOf="@id/down"
+            android:text="旋转" />
+    </RelativeLayout>
+
+</LinearLayout>

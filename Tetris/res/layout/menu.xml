@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/startClassical"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+		android:layout_marginLeft="80dp"
+		android:layout_marginTop="65dp"
+        android:text="经典模式" />
+    
+    <Button
+        android:id="@+id/start"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+		android:layout_marginLeft="80dp"
+		android:layout_marginTop="65dp"
+        android:text="隐藏模式" />
+
+    <Button
+        android:id="@+id/high_score"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+     	android:layout_marginLeft="80dp"
+		android:layout_marginTop="65dp"
+        android:text="最高分"
+    ></Button>
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+		android:layout_marginLeft="80dp"
+		android:layout_marginTop="65dp"
+        android:text="设   置"
+    ></Button>
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+		android:layout_marginLeft="80dp"
+		android:layout_marginTop="65dp"
+        android:text="退出"
+    ></Button>
+
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="300dp"
+        android:layout_height="100dp">
+        <TextView 
+            android:id="@+id/spntext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="难度设置："/>
+        <Spinner 
+            android:id="@+id/spiner"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/spntext"/>
+    </RelativeLayout>
+    
+    
+    <!-- 
+    <RelativeLayout 
+        android:layout_width="300dp"
+        android:layout_height="100dp">
+        <TextView 
+            android:id="@+id/spntextYC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="隐藏行数："/>
+        <Spinner 
+            android:id="@+id/spinerYC"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/spntextYC"/>
+    </RelativeLayout>
+     -->
+     
+    <RelativeLayout 
+        android:layout_width="300dp"
+        android:layout_height="100dp">
+        <TextView 
+            android:id="@+id/musictext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="音乐开关"/>
+        <CheckBox 
+            android:id="@+id/musicbox"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/musictext"/>"
+    </RelativeLayout>
+    <RelativeLayout 
+        android:layout_width="300dp"
+        android:layout_height="100dp">
+        <TextView 
+            android:id="@+id/touchtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="触屏开关"/>
+        <CheckBox 
+            android:id="@+id/touchbox"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_toRightOf="@id/touchtext"/>
+    </RelativeLayout>
+    
+
+</LinearLayout>
