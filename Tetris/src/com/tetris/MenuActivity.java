@@ -1,5 +1,6 @@
 package com.tetris;
 
+import android.animation.AnimatorSet.Builder;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,11 +36,13 @@ public class MenuActivity extends Activity{//开始菜单类
 	
 	CheckBox checkBoxM = null;//音乐开关
 	CheckBox checkBoxT = null;//触屏开关
-	final String HIGH_SCORE = "highscore";//存放最高分
+	final String HIGH_SCORE = "highscore";//存放经典模式最高分
+	final String HIGH_SCORE_CG="high_score_cg";//闯关模式的分数
+	final String HIGH_SCORE_YC="high_score_yc";//隐藏模式的分数
 	final String GAME_HARD = "gamehard";//存放游戏难度
 	final String GAME_MUSIC = "gamemusic";//游戏音乐
 	final String TOUCH_SCREEM = "touchscreem";//触屏开关
-	
+
 	final String GAME_YINCANG = "yincang"; 	//存储隐藏行数
 	
 	@Override
@@ -158,7 +161,9 @@ public class MenuActivity extends Activity{//开始菜单类
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder bulider = new AlertDialog.Builder(MenuActivity.this);
-				bulider.setMessage("最高分："+m_sp.getLong(HIGH_SCORE, 0));
+				
+				bulider.setMessage("经典模式最高分："+m_sp.getLong(HIGH_SCORE, 0)+"\n\n"+"隐藏模式最高分："+m_sp.getLong(HIGH_SCORE_YC, 0)+"\n\n"+"闯关模式最高分："+m_sp.getLong(HIGH_SCORE_CG, 0));
+				//builder.setMessage());
 				bulider.setTitle("最高分");
 				bulider.setPositiveButton("重置最高分", new DialogInterface.OnClickListener() {
 					
@@ -166,6 +171,7 @@ public class MenuActivity extends Activity{//开始菜单类
 					public void onClick(DialogInterface dialog, int which) {
 						SharedPreferences.Editor editor = m_sp.edit();
 						editor.putLong(HIGH_SCORE, 0);
+						//editor.putLong(HIGH_SCORE_CG, 0);
 						editor.commit();
 					}
 				});

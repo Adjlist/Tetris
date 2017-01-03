@@ -15,8 +15,10 @@ public class Data {
 	static long score = 0; // 分数、等级
 	static long line = 0;
 	
+
 	public static int yinchangline=0;	//隐藏字段数值
-	public static int CHUANGGUAN_TOP_SCORE=100;
+	static long score_yincang=0;//隐藏模式分数
+	public static int CHUANGGUAN_TOP_SCORE=20;
 	
 	static long score_chuangguan=0;//闯关模式分数
 	static int level_chuangguan=1;
@@ -96,7 +98,7 @@ public class Data {
 		}
 		return right;
 	}
-	public void goLeft(){//左移函数
+	public void goLeft(){//左移函数··			
 		if(cangoLeft()){
 			of_y--;
 		}
@@ -180,9 +182,7 @@ public class Data {
 				line++;
 				
 				switch (GameModel.MODEL) {
-				case 0://经典模式				
-					
-				case 1://隐藏模式
+				case 0://经典模式		
 					switch(GameActivity.level){//根据等级计算分数
 					case 0:
 						score=line*10;
@@ -195,6 +195,22 @@ public class Data {
 						break;
 					default:
 						score=line*10000;
+				}
+					break;
+					
+				case 1://隐藏模式
+					switch(GameActivity.level){//根据等级计算分数
+					case 0:
+						score_yincang=line*10;
+						break;
+					case 1:
+						score_yincang=line*50;
+						break;
+					case 2:
+						score_yincang=line*250;
+						break;
+					default:
+						score_yincang=line*10000;
 				}
 					break;
 				default://闯关模式

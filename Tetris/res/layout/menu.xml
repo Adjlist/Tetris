@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu"
+    android:background="@drawable/background7"
     android:orientation="vertical" >
 
     <Button
@@ -11,7 +11,9 @@
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
 		android:layout_marginTop="35dp"
-        android:text="经典模式" />
+       
+        android:text="经典模式"
+        />
     
     <Button
         android:id="@+id/start"
@@ -19,15 +21,19 @@
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
 		android:layout_marginTop="25dp"
-        android:text="隐藏模式" />
-    
+        
+        android:text="隐藏模式"
+       >
+    </Button>>
     <Button
         android:id="@+id/startCuangGuan"
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
 		android:layout_marginTop="25dp"
-        android:text="闯关模式" />
+ 		
+        android:text="闯关模式"
+         />
 
     <Button
         android:id="@+id/high_score"
