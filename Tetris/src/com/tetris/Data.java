@@ -3,6 +3,8 @@ package com.tetris;
 import java.util.Random;
 
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 
 
@@ -14,14 +16,12 @@ public class Data {
 	public static int k = 0, a = 0, state = 0, statenext = 0;// 随机数数和随机方块
 	static long score = 0; // 分数、等级
 	static long line = 0;
-	
-
-	public static int yinchangline=0;	//隐藏字段数值
+	public static int yinchangline=1;	//隐藏字段数值
 	static long score_yincang=0;//隐藏模式分数
-	public static int CHUANGGUAN_TOP_SCORE=20;
-	
+	public static int CHUANGGUAN_TOP_SCORE=50;
 	static long score_chuangguan=0;//闯关模式分数
 	static int level_chuangguan=1;
+	
 	
 	public static int getYinchangline() {
 		return yinchangline;
@@ -29,9 +29,6 @@ public class Data {
 	public static void setYinchangline(int yinchangline) {
 		Data.yinchangline = yinchangline;
 	}
-	
-	
-	
 	Random m_Random = null;// 随机函数
 	SharedPreferences m_sp = null;//用于存储最高分等
 	String fileName = "Data";//存放游戏一些数据，最高分、难度、音乐、触摸屏
@@ -137,6 +134,7 @@ public class Data {
 			saveScream();//不能下降保存m_screem数组
 			
 			cleanLine();
+			
 			k = a;//加入下一个方块，使他成为当前方块
 			a = m_Random.nextInt(28);//产生下一个方块
 			of_x = 0;//重新设定当前方块的位置

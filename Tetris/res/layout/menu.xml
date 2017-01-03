@@ -52,12 +52,12 @@
         android:text="设   置"
     ></Button>
     <Button
-        android:id="@+id/exit"
+        android:id="@+id/about"
         android:layout_width="200dp"
         android:layout_height="60dp"
 		android:layout_marginLeft="80dp"
 		android:layout_marginTop="25dp"
-        android:text="退出"
+        android:text="关   于"
     ></Button>
 
 </LinearLayout>

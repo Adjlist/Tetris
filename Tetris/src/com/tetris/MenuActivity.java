@@ -1,6 +1,5 @@
 package com.tetris;
 
-import android.animation.AnimatorSet.Builder;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MenuActivity extends Activity{//开始菜单类
 	
@@ -26,16 +26,21 @@ public class MenuActivity extends Activity{//开始菜单类
 	
 	Button hscoreB = null;//高分榜按钮
 	Button settingsB = null;//设置按钮
-	Button exitB = null;//退出按钮
+	Button about = null;//退出按钮
 	SharedPreferences m_sp = null;//用于存储最高分
 	String fileName = "Data";//存放游戏一些数据，最高分、难度、音乐、触摸屏
 	LayoutInflater inflater = null;
-	Spinner spinner = null;//难度spinner
 	
+	
+	
+	Spinner  spinner= null;//难度spinner
 	Spinner spinnerYC = null;//隐藏 spinner
 	
 	CheckBox checkBoxM = null;//音乐开关
 	CheckBox checkBoxT = null;//触屏开关
+	TextView classical_about=null;
+	TextView yincang_about=null;
+	TextView chuangguan_about=null;
 	final String HIGH_SCORE = "highscore";//存放经典模式最高分
 	final String HIGH_SCORE_CG="high_score_cg";//闯关模式的分数
 	final String HIGH_SCORE_YC="high_score_yc";//隐藏模式的分数
@@ -56,7 +61,7 @@ public class MenuActivity extends Activity{//开始菜单类
 		startYincangBtn = (Button)findViewById(R.id.start);//开始游戏
 		hscoreB = (Button)findViewById(R.id.high_score);//最高分
 		settingsB = (Button)findViewById(R.id.settings);//设置
-		exitB = (Button)findViewById(R.id.exit);//退出按钮
+		about = (Button)findViewById(R.id.about);//退出按钮
 		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this,android.R.layout.simple_list_item_1,
 				new String[]{"简单","一般","困难","变态"});//用于设置难度
@@ -86,7 +91,7 @@ public class MenuActivity extends Activity{//开始菜单类
 				spinnerYC = (Spinner) view.findViewById(R.id.spinerYC);	//隐藏
 				
 				spinnerYC.setAdapter(adapterYC);
-				spinnerYC.setSelection(m_sp.getInt(GAME_YINCANG, 0));	//隐藏
+				spinnerYC.setSelection(m_sp.getInt(GAME_YINCANG, 1));	//隐藏
 				
 				
 				bulider.setView(view);
@@ -97,8 +102,7 @@ public class MenuActivity extends Activity{//开始菜单类
 					public void onClick(DialogInterface dialog, int which) {
 						
 						SharedPreferences.Editor editor = m_sp.edit();
-						editor.putInt(GAME_YINCANG, spinnerYC.getSelectedItemPosition());
-						
+						editor.putInt(GAME_YINCANG, spinnerYC.getSelectedItemPosition());						
 						editor.commit();						
 						
 						GameModel.MODEL=GameModel.MODEL_YINCANG;//隐藏模式
@@ -165,14 +169,10 @@ public class MenuActivity extends Activity{//开始菜单类
 				bulider.setMessage("经典模式最高分："+m_sp.getLong(HIGH_SCORE, 0)+"\n\n"+"隐藏模式最高分："+m_sp.getLong(HIGH_SCORE_YC, 0)+"\n\n"+"闯关模式最高分："+m_sp.getLong(HIGH_SCORE_CG, 0));
 				//builder.setMessage());
 				bulider.setTitle("最高分");
-				bulider.setPositiveButton("重置最高分", new DialogInterface.OnClickListener() {
+				bulider.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						SharedPreferences.Editor editor = m_sp.edit();
-						editor.putLong(HIGH_SCORE, 0);
-						//editor.putLong(HIGH_SCORE_CG, 0);
-						editor.commit();
 					}
 				});
 				bulider.setNegativeButton("退出", new DialogInterface.OnClickListener() {
@@ -239,24 +239,33 @@ public class MenuActivity extends Activity{//开始菜单类
 			}
 		});
 		
-		exitB.setOnClickListener(new OnClickListener() {//设置退出按钮
+		about.setOnClickListener(new OnClickListener() {//设置退出按钮
 			
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder bulider = new AlertDialog.Builder(MenuActivity.this);
-				bulider.setMessage("真的要退出吗？再玩一会儿嘛！");
-				bulider.setTitle("退出游戏！");
-				bulider.setPositiveButton("再玩一会儿", new DialogInterface.OnClickListener() {
+				bulider.setTitle("游戏规则");
+				if(inflater==null){//加载设置布局
+					inflater = LayoutInflater.from(MenuActivity.this);
+				}
+				
+				View view = (View) inflater.inflate(R.layout.about, null);
+				classical_about=(TextView) findViewById(R.id.classical_about);
+				yincang_about=(TextView) findViewById(R.id.yincang_about);
+				chuangguan_about=(TextView) findViewById(R.id.chuangguan_about);
+				bulider.setView(view);
+				bulider.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						
 					}
 				});
-				bulider.setNegativeButton("退出游戏", new DialogInterface.OnClickListener() {
+				bulider.setNegativeButton("退出", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						finish();
+						//finish();
 					}
 				});
 				bulider.create();

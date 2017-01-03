@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+     >
+    <TextView
+        android:id="@+id/classical_about"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20dp"
+        android:text="        经典模式采用累计的方法，得分一直累加，直到游戏结束；">"
+        </TextView>
+        
+        <TextView
+        android:id="@+id/yincang_about"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20dp"
+        android:text="        隐藏模式可以选择隐藏的行数，过程中可以显示；">
+        </TextView> 
+       <TextView
+        android:id="@+id/chuangguan_about"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20dp"
+        android:text="        闯关模式是每消除10行即过关，每一关的速度均不同">
+        </TextView>
+        
+            
+        <TextView
+        android:id="@+id/attention_about"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20dp"
+        android:text="       注意：难度设置只针对经典模式和隐藏模式。">
+        </TextView>
+
+</LinearLayout>

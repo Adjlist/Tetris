@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background11"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
     <RelativeLayout
         android:layout_width="350dp"
@@ -33,7 +34,7 @@
                 android:layout_height="40dp"
                 android:layout_margin="5dp"                
                 android:layout_below="@id/stop"
-                android:text="Hint" />
+                android:text="提示" />
 
             <com.tetris.ShapView
                 android:id="@+id/sv"
@@ -69,7 +70,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
                 android:layout_below="@id/done"
-                android:background="@drawable/control_drop1"
+                android:text="速降"
                 />
         </RelativeLayout>
     </RelativeLayout>

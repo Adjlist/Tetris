@@ -16,9 +16,6 @@ public class GameYincangView extends View {
 
 	}
 
-
-
-
 	public void onDraw(Canvas canvas) {// 画图函数，主线程中实现不断刷新，此函数响应刷新
 		super.onDraw(canvas);
 		
@@ -32,7 +29,7 @@ public class GameYincangView extends View {
 		float xdis = getWidth() / 10.0f;
 		float ydis = getHeight() / 20.0f;
 		Paint m_Paint = new Paint(); // 新建画笔
-		m_Paint.setColor(Color.WHITE);
+		m_Paint.setColor(Color.WHITE);//设置背景颜色
 		canvas.drawRect(0.0f, 0.0f, width, height, m_Paint);//画白底背景
 		m_Paint.setColor(Color.BLACK);
 		for(int i = 0;i < 21;i++){//画横线
@@ -41,14 +38,21 @@ public class GameYincangView extends View {
 		for(int j = 0;j < 11;j++){//画竖线
 			canvas.drawLine(j*xdis, 0.0f, j*xdis, height, m_Paint);
 		}
+		/*public void drawLine(float startX,float startY,float stopX,float stopY,Paint paint)
+		 * 参数说明
+		 * startX:起始端点的X坐标
+		 * startY:起始端点的Y坐标
+		 * stopX:终止端点的X坐标
+		 * stopY:终止端点的Y坐标
+		 * paint：绘制直线所使用的画线
+		 **/
+		
 	}
 	public void paintBlock(Canvas canvas){
 		float xdis = getWidth() / 10.0f;
 		float ydis = getHeight() / 20.0f;
 		Paint m_Paint = new Paint();
-//		m_Paint.setColor(Color.BLACK);
 		m_Paint.setStyle(Style.FILL);
-		
 		/* 
 		 * 设置透明行数
 		 * 		减去data.yinchangline；
@@ -60,7 +64,6 @@ public class GameYincangView extends View {
 					if(Data.m_screen[i][j]!=0){
 						m_Paint.setColor(Data.m_screen[i][j]);
 						canvas.drawRect(j*xdis+3, (i-4)*ydis+3, (j+1)*xdis-2, (i-3)*ydis-2, m_Paint);
-//						canvas.drawRect(left, top, right, bottom, paint)
 					}
 				}
 			}
@@ -74,7 +77,6 @@ public class GameYincangView extends View {
 					{
 						m_Paint.setColor(Data.m_screen[i][j]);
 						canvas.drawRect(j*xdis+3, (i-4)*ydis+3, (j+1)*xdis-2, (i-3)*ydis-2, m_Paint);
-//						canvas.drawRect(left, top, right, bottom, paint)
 					}
 				}
 			}
@@ -89,11 +91,6 @@ public class GameYincangView extends View {
 			}
 		}
 		
-		
-				
-		
-		
-//		m_Paint.setColor(Color.BLACK);
 		for(int i=0;i<4;i++){//画移动方块
 			for(int j=0;j<4;j++){
 				if(StateFang.state[Data.k][i][j]!=0){

@@ -17,9 +17,6 @@ public class GameClassicalView extends View {
 
 	}
 
-	
-
-
 	public void onDraw(Canvas canvas) {// 画图函数，主线程中实现不断刷新，此函数响应刷新
 		super.onDraw(canvas);
 		
@@ -47,35 +44,15 @@ public class GameClassicalView extends View {
 		float xdis = getWidth() / 10.0f;
 		float ydis = getHeight() / 20.0f;
 		Paint m_Paint = new Paint();
-//		m_Paint.setColor(Color.BLACK);
 		m_Paint.setStyle(Style.FILL);
-		
-		/* 
-		 * 设置透明行数
-		 * 		减去data.yinchangline；
-		 */
 		for(int i=0;i<Data.of_Width;i++){//画固定的方块
 			for(int j=0;j<Data.of_Height;j++){
 				if(Data.m_screen[i][j]!=0){
 					m_Paint.setColor(Data.m_screen[i][j]);
 					canvas.drawRect(j*xdis+3, (i-4)*ydis+3, (j+1)*xdis-2, (i-3)*ydis-2, m_Paint);
-//					canvas.drawRect(left, top, right, bottom, paint)
 				}
 			}
 		}
-		/*
-		 * 将最后的data.yinchangline改成白色，即将最后一行隐藏起来
-		 
-		for(int i=Data.of_Width;i>Data.of_Width-Data.yinchangline;i--){
-			for(int j=0;j<Data.of_Height;j++){
-				m_Paint.setColor(Color.WHITE);
-				canvas.drawRect(j*xdis+3, (i-4)*ydis+3, (j+1)*xdis-2, (i-3)*ydis-2, m_Paint);
-			}
-		}
-				
-		*/
-		
-//		m_Paint.setColor(Color.BLACK);
 		for(int i=0;i<4;i++){//画移动方块
 			for(int j=0;j<4;j++){
 				if(StateFang.state[Data.k][i][j]!=0){

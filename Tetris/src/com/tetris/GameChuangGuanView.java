@@ -14,7 +14,6 @@ public class GameChuangGuanView extends View{
 
 	public GameChuangGuanView(Context context,AttributeSet attrs) {
 		super(context,attrs);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -25,9 +24,6 @@ public class GameChuangGuanView extends View{
 		paintLine(canvas); //绘制线条
 		paintBlock(canvas);// 绘制方块
 	}
-	
-	
-	
 	public void paintLine(Canvas canvas) {
 		float width = getWidth();
 		float height = getHeight();
@@ -45,14 +41,11 @@ public class GameChuangGuanView extends View{
 		}
 	}
 	
-	
-	
 	public void paintBlock(Canvas canvas)
 	{
 		float xdis = getWidth() / 10.0f;
 		float ydis = getHeight() / 20.0f;
 		Paint m_Paint = new Paint();
-//		m_Paint.setColor(Color.BLACK);
 		m_Paint.setStyle(Style.FILL);
 		for(int i=0;i<Data.of_Width;i++)
 		{//画固定的方块
@@ -62,13 +55,11 @@ public class GameChuangGuanView extends View{
 				{
 					m_Paint.setColor(Data.m_screen[i][j]);
 					canvas.drawRect(j*xdis+3, (i-4)*ydis+3, (j+1)*xdis-2, (i-3)*ydis-2, m_Paint);
-//					canvas.drawRect(left, top, right, bottom, paint)
 				}
 			}
 	
 		}
 
-//	m_Paint.setColor(Color.BLACK);
 	for(int i=0;i<4;i++){//画移动方块
 		for(int j=0;j<4;j++){
 			if(StateFang.state[Data.k][i][j]!=0){

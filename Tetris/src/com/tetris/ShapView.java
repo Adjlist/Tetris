@@ -18,12 +18,10 @@ public class ShapView extends View {
 
 	}
 
-
 	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-//		paintLine(canvas);
 		float width = getWidth();
 		float height = getHeight();
 		float xdis = getWidth() / 6.0f;
